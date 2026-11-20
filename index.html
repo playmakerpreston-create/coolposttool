@@ -1,6 +1,8 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f2f2f7">
-<title>CoolPostTool</title>
+<title>Pres Post</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20330%20335%22%3E%3Cdefs%3E%3Cmask%20id%3D%22pmHole%22%3E%3Crect%20width%3D%22330%22%20height%3D%22335%22%20fill%3D%22%23fff%22/%3E%3Crect%20x%3D%2258%22%20y%3D%2255%22%20width%3D%22217%22%20height%3D%22153%22%20rx%3D%2222%22%20fill%3D%22%23000%22/%3E%3C/mask%3E%3C/defs%3E%3Cg%20fill%3D%22%230a84ff%22%20mask%3D%22url%28%23pmHole%29%22%3E%3Crect%20width%3D%22330%22%20height%3D%22258%22%20rx%3D%2270%22/%3E%3Crect%20y%3D%22150%22%20width%3D%2269%22%20height%3D%22185%22%20rx%3D%225%22/%3E%3C/g%3E%3Crect%20x%3D%2286%22%20y%3D%22113%22%20width%3D%22159%22%20height%3D%2243%22%20rx%3D%2221.5%22%20fill%3D%22%230a84ff%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap">
 <style>
 /* Layout: two-column desk like CoolReelTool — grouped inset cards (left), sticky 4:5 monitor with export (right); one column on phones.
    Look: Apple-style system UI — system font, grouped grey ground, borderless rounded cards, segmented controls, iOS switches */
@@ -29,6 +31,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 
 .top{max-width:1180px;margin:0 auto 18px;display:flex;align-items:baseline;gap:4px 14px;flex-wrap:wrap}
 .top h1{font-size:30px;font-weight:700;letter-spacing:-.025em}
+.brand{display:flex;align-items:center;gap:10px;font-family:"Poppins",var(--f-ui);font-weight:700!important;letter-spacing:-.02em!important}
+.brand .mark{width:30px;height:auto;flex:none}
 .top p{margin:0;color:var(--muted);font-size:15px}
 
 .desk{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:20px;align-items:start}
@@ -109,6 +113,60 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
 .saved{display:flex;flex-direction:column;align-items:center;gap:8px;width:min(100%,520px)}
 .saved img{max-width:180px;border-radius:6px;box-shadow:0 0 0 1px var(--line)}
 
+/* cleaned-up editor */
+.profrow{display:flex;align-items:center;gap:10px}
+.profrow select{flex:1;min-width:0}
+.row.between{justify-content:space-between;align-items:center}
+.drop{padding:12px}
+.addons{display:flex;gap:8px;flex-wrap:wrap;padding-top:4px;border-top:1px solid var(--line);padding-top:14px}
+.addon{position:relative;display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;background:var(--well);color:var(--ink);font-weight:600;font-size:13px;cursor:pointer;user-select:none;transition:background .15s,color .15s}
+.addon input{position:absolute;opacity:0;width:1px;height:1px}
+.addon::before{content:"+";font-weight:700;color:var(--focus)}
+.addon:has(input:checked){background:var(--focus);color:#fff}
+.addon:has(input:checked)::before{content:"✓";color:#fff}
+.addon:has(input:focus-visible){outline:2px solid var(--focus);outline-offset:2px}
+.sub{background:var(--well);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:12px}
+.sub input[type=text],.sub textarea{background:var(--panel)}
+.sub .thumbs .thumb{background:var(--panel)}
+.qwho{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.layouts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.layouts button{border:0;background:var(--well);border-radius:12px;padding:8px 8px 9px;display:flex;flex-direction:column;gap:7px;cursor:pointer;color:var(--ink);font-weight:600;font-size:12px;transition:box-shadow .15s,background .15s}
+.layouts button[aria-pressed="true"]{box-shadow:0 0 0 2px var(--focus);background:color-mix(in srgb,var(--focus) 10%,transparent);color:var(--focus)}
+.mini{aspect-ratio:4/5;background:var(--panel);border-radius:6px;padding:8px 7px;display:flex;flex-direction:column;gap:3px}
+.mini i{display:block;height:4px;border-radius:2px;background:var(--muted);opacity:.5;width:100%}
+.mini b{display:block;border-radius:3px;background:color-mix(in srgb,var(--focus) 55%,transparent);flex:1}
+.mrow{display:flex;gap:3px;flex:1;margin-top:4px}
+.mtwo{display:flex;gap:5px;margin-top:3px}
+.mcol{flex:1;display:flex;flex-direction:column;gap:3px;justify-content:center}
+.mside{flex-direction:row;gap:5px}
+details.more{background:var(--panel);border-radius:14px}
+details.more > summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;gap:10px;border-radius:14px}
+details.more > summary::-webkit-details-marker{display:none}
+details.more > summary h2{font-size:17px;font-weight:600;letter-spacing:-.015em}
+details.more > summary .sum{flex:1;min-width:0;text-align:right;color:var(--muted);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+details.more > summary::after{content:"";flex:none;width:7px;height:7px;margin:0 3px 3px 0;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:transform .2s}
+details.more[open] > summary::after{transform:rotate(-135deg);margin:3px 3px 0 0}
+details.more > summary:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.more-body{padding:0 16px 16px;display:flex;flex-direction:column;gap:14px}
+/* crop */
+.crop{width:min(100%,520px);display:flex;flex-direction:column;gap:10px;background:var(--well);border-radius:12px;padding:12px 14px}
+.crop .sec-h b{font-weight:600}
+.crop-hint{font-size:13px;color:var(--muted);text-align:center}
+.screen.cropping canvas{touch-action:none;cursor:grab}
+.screen.cropping.dragging canvas{cursor:grabbing}
+.screen.has-photos canvas{cursor:pointer}
+input[type=range]{width:100%;accent-color:var(--focus)}
+/* quote */
+.qacts{display:flex;gap:8px;flex-wrap:wrap}
+.qacts .btn{flex:1 1 auto}
+.qsrc{font-size:13px;color:var(--muted)}
+.qsrc b{color:var(--ink);font-weight:600}
+/* caption */
+.cap{width:min(100%,520px);display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line);padding-top:16px}
+.cap textarea{min-height:170px;font-size:15px;line-height:1.45}
+.cap .meta{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.cap .count{font:500 12px var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.cap .count.over{color:var(--rec)}
 /* profiles */
 .empty{color:var(--muted);font-size:13px;text-align:center;padding:22px 12px;border:1.5px dashed var(--line);border-radius:14px}
 .pcard{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;background:var(--panel);border-radius:14px;padding:12px;cursor:pointer;transition:box-shadow .15s}
@@ -126,8 +184,8 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
 </style>
 </head><body>
 <header class="top">
-  <h1>CoolPostTool</h1>
-  <p>Paste a tweet link. Get the meme back with your branding.</p>
+  <h1 class="brand"><svg class="mark" viewBox="0 0 330 335" aria-hidden="true"><defs><mask id="pmHole"><rect width="330" height="335" fill="#fff"/><rect x="58" y="55" width="217" height="153" rx="22" fill="#000"/></mask></defs><g fill="#0a84ff" mask="url(#pmHole)"><rect width="330" height="258" rx="70"/><rect y="150" width="69" height="185" rx="5"/></g><rect x="86" y="113" width="159" height="43" rx="21.5" fill="#0a84ff"/></svg><span>Pres Post</span></h1>
+  <p>Make it here. Then all you gotta do is Pres Post.</p>
 </header>
 
 <main class="desk">
@@ -139,104 +197,162 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
 
     <div class="tabpanel" id="tab-editor">
       <section class="sec">
-        <div class="sec-h"><h2>Page profile</h2><button class="btn small" id="profUpdate">Save changes to profile</button></div>
-        <select id="profSel" aria-label="Page profile"></select>
-        <span class="hint">Switch pages in one tap. Edits don't change the saved profile until you press Save changes.</span>
+        <div class="profrow">
+          <label class="label" for="profSel">Page</label>
+          <select id="profSel"></select>
+          <button class="btn small" id="profUpdate" title="Save your edits to this page profile">Save</button>
+        </div>
       </section>
 
       <section class="sec">
-        <div class="sec-h"><h2>Tweet</h2><button class="btn small" id="clearPost">Start new post</button></div>
-        <div class="field">
-          <label class="label" for="link">Tweet link</label>
-          <div class="linkrow">
-            <input type="url" id="link" placeholder="https://x.com/user/status/…" autocomplete="off">
-            <button class="btn" id="pasteLink">Paste</button>
-            <button class="btn rec" id="importBtn">Make it</button>
-          </div>
+        <div class="sec-h"><h2>Tweet</h2><button class="btn small" id="clearPost">New post</button></div>
+        <div class="linkrow">
+          <input type="url" id="link" placeholder="Paste a tweet link" aria-label="Tweet link" autocomplete="off">
+          <button class="btn" id="pasteLink">Paste</button>
+          <button class="btn rec" id="importBtn">Make it</button>
         </div>
         <div class="detect" id="detect" hidden>
           <span class="grow" id="detText">Post by <b id="detHandle"></b></span>
           <a class="btn small" id="openPost" href="#" target="_blank" rel="noopener">Open post</a>
-          <button class="btn small" id="addCredit">Add credit</button>
+          <button class="btn small" id="addCredit">Credit them</button>
         </div>
         <div class="field">
-          <div class="sec-h"><label class="label" for="text">Tweet text</label>
-          </div>
-          <textarea id="text" rows="4" placeholder="Paste the tweet's text here"></textarea>
-          <span class="hint" id="textHint">Filled in from the link. Edit it however you like.</span>
+          <label class="label" for="text">Text</label>
+          <textarea id="text" rows="4" placeholder="The tweet's text"></textarea>
+          <span class="hint" id="textHint" hidden></span>
         </div>
         <div class="field">
-          <div class="sec-h"><span class="label">Images <span id="mediaCount"></span></span><span class="opt">Up to 4</span></div>
-          <label class="drop" id="drop" for="mediaIn">Drop images here, paste them, or click to choose</label>
-          <input type="file" id="mediaIn" accept="image/*" multiple hidden>
+          <div class="sec-h"><span class="label">Photos <span id="mediaCount"></span></span><span class="opt">Up to 4</span></div>
           <div class="thumbs" id="thumbs"></div>
+          <label class="drop" id="drop" for="mediaIn">Add photos · drop, paste or tap</label>
+          <input type="file" id="mediaIn" accept="image/*" multiple hidden>
         </div>
-      </section>
 
-      <section class="sec">
-        <div class="sec-h"><h2>Look</h2></div>
-        <div class="row" style="justify-content:space-between;align-items:center">
-          <span class="label">Background</span>
-          <div class="seg" id="bgSeg" role="group" aria-label="Background"><button data-v="white">White</button><button data-v="black">Black</button></div>
+        <div class="addons" role="group" aria-label="Add to this post">
+          <label class="addon"><input type="checkbox" id="qOn">Quote tweet</label>
+          <label class="addon"><input type="checkbox" id="creditOn">Credit</label>
         </div>
-        <div class="row" style="justify-content:space-between;align-items:center">
-          <span class="label">Size</span>
-          <div class="seg" id="formatSeg" role="group" aria-label="Post size"><button data-v="4:5">4:5 Feed</button><button data-v="1:1">1:1</button><button data-v="9:16">9:16 Story</button></div>
-        </div>
-        <div class="row" style="justify-content:space-between;align-items:center">
-          <span class="label">Text size</span>
-          <div class="seg" id="sizeSeg" role="group" aria-label="Text size"><button data-v="S">S</button><button data-v="M">M</button><button data-v="L">L</button></div>
-        </div>
-        <div class="row" style="justify-content:space-between;align-items:center">
-          <span class="label">Text align</span>
-          <div class="seg" id="tAlignSeg" role="group" aria-label="Text alignment"><button data-v="left">Left</button><button data-v="center">Center</button></div>
-        </div>
-        <div class="field">
-          <label class="label" for="hlWords">Highlight words</label>
-          <div class="swatch"><input type="text" id="hlWords" placeholder="e.g. GTA 6"><input type="color" id="hlColor" aria-label="Highlight color"></div>
-          <span class="hint">Separate words or phrases with commas.</span>
-        </div>
-      </section>
 
-      <section class="sec">
-        <div class="sec-h"><h2>Your branding</h2>
-          <label class="switch"><input type="checkbox" id="lockOn"><i></i><span class="opt">Show</span></label>
-        </div>
-        <div id="lockBody" style="display:flex;flex-direction:column;gap:12px">
-          <div class="row" style="justify-content:space-between;align-items:center">
-            <label class="switch"><input type="checkbox" id="showAv"><i></i>Profile picture</label>
-            <div class="avatar-pick" id="avPick">
-              <canvas id="avPrev" width="104" height="104"></canvas>
-              <label class="btn small" for="avIn" id="avLabel">Add photo</label>
-              <button class="btn small" id="avRemove" hidden>Remove</button>
-              <input type="file" id="avIn" accept="image/*" hidden>
+        <div class="sub" id="qBody" hidden>
+          <div class="sec-h"><span class="label">Quote tweet</span>
+            <div class="qacts"><button class="btn small" id="qFromMain">Use linked tweet</button><button class="btn small" id="qReset" hidden>Reset author</button></div>
+          </div>
+          <span class="qsrc" id="qSrc" hidden></span>
+          <div class="qwho">
+            <div class="avatar-pick">
+              <canvas id="qAvPrev" width="104" height="104"></canvas>
+              <label class="btn small" for="qAvIn" id="qAvLabel">Add photo</label>
+              <button class="btn small" id="qAvRemove" hidden>Remove</button>
+              <input type="file" id="qAvIn" accept="image/*" hidden>
             </div>
+            <label class="switch"><input type="checkbox" id="qVerified"><i></i>Verified</label>
           </div>
           <div class="row">
-            <div class="field"><label class="label" for="pName">Name</label><input type="text" id="pName"></div>
-            <div class="field"><label class="label" for="pUser">Username</label><input type="text" id="pUser"></div>
+            <div class="field"><label class="label" for="qName">Name</label><input type="text" id="qName" placeholder="Rockstar Games"></div>
+            <div class="field"><label class="label" for="qUser">Username</label><input type="text" id="qUser" placeholder="@RockstarGames"></div>
           </div>
-          <div class="row" style="justify-content:space-between;align-items:center">
-            <label class="switch"><input type="checkbox" id="pVerified"><i></i>Verified badge</label>
-            <div class="seg" id="alignSeg" role="group" aria-label="Branding alignment"><button data-v="left">Left</button><button data-v="center">Center</button></div>
+          <div class="field">
+            <label class="label" for="qText">Quoted text</label>
+            <textarea id="qText" rows="3" placeholder="What the quoted tweet says"></textarea>
           </div>
-          <div class="field" id="badgeField">
-            <span class="label">Badge color</span>
-            <div class="badges" id="badgeSeg" role="group" aria-label="Badge color">
-              <button data-v="#1d9bf0" style="background:#1d9bf0" aria-label="Blue" title="Blue"></button>
-              <button data-v="#f2b705" style="background:#f2b705" aria-label="Gold" title="Gold"></button>
-              <button data-v="#00ba7c" style="background:#00ba7c" aria-label="Green" title="Green"></button>
-              <button data-v="#f4212e" style="background:#f4212e" aria-label="Red" title="Red"></button>
-              <button data-v="#829aab" style="background:#829aab" aria-label="Grey" title="Grey"></button>
-            </div>
+          <div class="field">
+            <div class="sec-h"><span class="label">Quote photos <span id="qMediaCount"></span></span>
+              <label class="btn small" for="qMediaIn">Add</label></div>
+            <input type="file" id="qMediaIn" accept="image/*" multiple hidden>
+            <div class="thumbs" id="qThumbs"></div>
           </div>
+        </div>
+
+        <div class="sub" id="creditBody" hidden>
+          <label class="label" for="credit">Credit line</label>
+          <input type="text" id="credit" placeholder="via @rockstargames">
+          <span class="hint">A small grey line under the post.</span>
         </div>
       </section>
 
       <section class="sec">
-        <div class="sec-h"><h2>Credit</h2><span class="opt">Optional</span></div>
-        <input type="text" id="credit" aria-label="Credit line" placeholder="e.g. via @rockstargames">
-        <span class="hint">Small grey line under the post. Leave empty to hide it.</span>
+        <div class="sec-h"><h2>Layout</h2>
+          <div class="seg" id="formatSeg" role="group" aria-label="Post size"><button data-v="4:5">4:5</button><button data-v="1:1">1:1</button><button data-v="9:16">9:16</button></div>
+        </div>
+        <div class="layouts" id="layoutSeg" role="group" aria-label="Layout">
+          <button data-v="stack"><span class="mini"><i style="width:90%"></i><i style="width:65%"></i><span class="mrow"><b></b><b></b></span></span>Stacked</button>
+          <button data-v="side"><span class="mini mside"><span class="mcol"><i></i><i style="width:80%"></i><i></i><i style="width:70%"></i><i></i><i style="width:85%"></i></span><b></b></span>Text + photo</button>
+          <button data-v="cols"><span class="mini"><i style="width:85%"></i><span class="mtwo"><span class="mcol"><i></i><i style="width:75%"></i><i></i></span><span class="mcol"><i style="width:80%"></i><i></i><i style="width:65%"></i></span></span><span class="mrow"><b></b><b></b></span></span>2 columns</button>
+        </div>
+        <span class="hint" id="layoutHint"></span>
+        <div class="field" id="sideField" hidden>
+          <label class="label" for="sideW">Photo width <span id="sideWVal">45%</span></label>
+          <input type="range" id="sideW" min="30" max="60" step="1" value="45">
+          <div class="sec-h" style="margin-top:6px"><label class="label" for="sideH">Photo height <span id="sideHVal">Auto</span></label>
+            <button class="btn small" id="sideHAuto">Match text</button></div>
+          <input type="range" id="sideH" min="15" max="100" step="1" value="60">
+          <span class="hint">Drag for a short or tall photo, whatever the text length.</span>
+        </div>
+      </section>
+
+      <details class="more">
+        <summary><h2>Look</h2><span class="sum" id="lookSum"></span></summary>
+        <div class="more-body">
+          <div class="row between">
+            <span class="label">Background</span>
+            <div class="seg" id="bgSeg" role="group" aria-label="Background"><button data-v="white">White</button><button data-v="black">Black</button></div>
+          </div>
+          <div class="row between">
+            <span class="label">Text size</span>
+            <div class="seg" id="sizeSeg" role="group" aria-label="Text size"><button data-v="S">S</button><button data-v="M">M</button><button data-v="L">L</button></div>
+          </div>
+          <div class="row between">
+            <span class="label">Text align</span>
+            <div class="seg" id="tAlignSeg" role="group" aria-label="Text alignment"><button data-v="left">Left</button><button data-v="center">Center</button></div>
+          </div>
+          <div class="field">
+            <label class="label" for="hlWords">Highlight words</label>
+            <div class="swatch"><input type="text" id="hlWords" placeholder="GTA 6, Vice City"><input type="color" id="hlColor" aria-label="Highlight color"></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="more">
+        <summary><h2>Branding</h2><span class="sum" id="brandSum"></span></summary>
+        <div class="more-body">
+          <label class="switch"><input type="checkbox" id="lockOn"><i></i>Show my name on posts</label>
+          <div id="lockBody" style="display:flex;flex-direction:column;gap:12px">
+            <div class="row between">
+              <label class="switch"><input type="checkbox" id="showAv"><i></i>Profile picture</label>
+              <div class="avatar-pick" id="avPick">
+                <canvas id="avPrev" width="104" height="104"></canvas>
+                <label class="btn small" for="avIn" id="avLabel">Add photo</label>
+                <button class="btn small" id="avRemove" hidden>Remove</button>
+                <input type="file" id="avIn" accept="image/*" hidden>
+              </div>
+            </div>
+            <div class="row">
+              <div class="field"><label class="label" for="pName">Name</label><input type="text" id="pName"></div>
+              <div class="field"><label class="label" for="pUser">Username</label><input type="text" id="pUser"></div>
+            </div>
+            <div class="row between">
+              <label class="switch"><input type="checkbox" id="pVerified"><i></i>Verified badge</label>
+              <div class="seg" id="alignSeg" role="group" aria-label="Branding alignment"><button data-v="left">Left</button><button data-v="center">Center</button></div>
+            </div>
+            <div class="field" id="badgeField">
+              <span class="label">Badge color</span>
+              <div class="badges" id="badgeSeg" role="group" aria-label="Badge color">
+                <button data-v="#1d9bf0" style="background:#1d9bf0" aria-label="Blue" title="Blue"></button>
+                <button data-v="#f2b705" style="background:#f2b705" aria-label="Gold" title="Gold"></button>
+                <button data-v="#00ba7c" style="background:#00ba7c" aria-label="Green" title="Green"></button>
+                <button data-v="#f4212e" style="background:#f4212e" aria-label="Red" title="Red"></button>
+                <button data-v="#829aab" style="background:#829aab" aria-label="Grey" title="Grey"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- captions are switched off; kept so saved profiles still load -->
+      <section hidden>
+        <div id="aiRow"><input type="checkbox" id="capAI"></div>
+        <input type="checkbox" id="capText"><input type="checkbox" id="capCredit">
+        <input type="text" id="capCta"><textarea id="capTags"></textarea>
       </section>
     </div>
 
@@ -259,9 +375,26 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
       <button class="btn rec" id="saveBtn"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v8M4.5 6.5 8 10l3.5-3.5M2.5 13.5h11"/></svg><span>Save image</span></button>
       <button class="btn" id="copyBtn">Copy image</button>
     </div>
+    <span class="crop-hint" id="cropHint" hidden>Tap a photo in the preview to crop, zoom or move it.</span>
+    <div class="crop" id="cropBox" hidden>
+      <div class="sec-h"><span><b id="cropWhich">Photo 1</b> · drag it in the preview to move it</span>
+        <div style="display:flex;gap:6px"><button class="btn small" id="cropReset">Reset</button><button class="btn small blue" id="cropDone">Done</button></div></div>
+      <div class="field"><label class="label" for="cropZoom">Zoom <span id="cropZoomVal">100%</span></label>
+        <input type="range" id="cropZoom" min="100" max="400" step="1" value="100"></div>
+      <div class="field" id="frameField"><label class="label" for="frameH">Photo frame height <span id="frameHVal">100%</span></label>
+        <input type="range" id="frameH" min="50" max="150" step="1" value="100"></div>
+      <span class="hint">Pinch or scroll over the photo to zoom too. The blue outline only shows here, not in your saved image.</span>
+    </div>
     <div class="saved" id="savedBox" hidden>
       <img id="savedImg" alt="Your finished post">
       <span class="hint">On a phone, press and hold the image to save it to Photos.</span>
+    </div>
+    <div class="cap" aria-label="Instagram caption" hidden>
+      <div class="meta"><h2 style="font-size:17px;font-weight:600">Instagram caption</h2>
+        <div style="display:flex;gap:8px"><button class="btn small" id="capRebuild">Rebuild</button><button class="btn small blue" id="capCopy">Copy caption</button></div>
+      </div>
+      <textarea id="caption" aria-label="Instagram caption" placeholder="Your caption appears here once a tweet is loaded"></textarea>
+      <div class="meta"><span class="hint" id="capHint">Built from the tweet. Edit it here before you copy.</span><span class="count" id="capCount"></span></div>
     </div>
     <div class="status" id="status">Paste a tweet link to start.</div>
   </section>
@@ -278,11 +411,15 @@ const DEFAULTS = {
   link: "", text: "First look at new in-game car models from GTA 6.", credit: "",
   bg: "white", format: "4:5", size: "M", tAlign: "left", hlWords: "", hlColor: "#1d9bf0",
   lockOn: true, showAv: true, name: "Your Page", user: "@yourpage", verified: true, badgeColor: "#1d9bf0", align: "left",
-  profileId: ""
+  profileId: "", creditOn: false,
+  frameH: 1, layout: "stack", sideW: .45, sideH: 0,
+  qOn: false, qName: "", qUser: "", qVerified: false, qText: "",
+  caption: "", capEdited: false, capText: true, capCredit: true, capCta: "Follow {me} for more", capTags: ""
 };
-const PF = ["bg","format","size","tAlign","hlColor","lockOn","showAv","name","user","verified","badgeColor","align"];
+const PF = ["bg","format","size","tAlign","hlColor","lockOn","showAv","name","user","verified","badgeColor","align","capText","capCredit","capCta","capTags"];
 const S = { ...DEFAULTS };
 try { Object.assign(S, JSON.parse(localStorage.getItem("coolposttool:v1") || "{}")); } catch(e) {}
+try { const st = JSON.parse(localStorage.getItem("coolposttool:v1") || "{}"); if (!("creditOn" in st) && st.credit) S.creditOn = true; } catch(e) {}
 const save = () => { try { localStorage.setItem("coolposttool:v1", JSON.stringify(S)); } catch(e) {} };
 let avatar = null;          // HTMLImageElement or null
 let media = [];             // [{img, url}]
@@ -313,7 +450,7 @@ function syncDetect(){
   if (p) {
     $("#detHandle").textContent = "@" + p.handle;
     $("#openPost").href = `https://x.com/${p.handle}/status/${p.id}`;
-    $("#addCredit").hidden = S.credit.trim().toLowerCase() === ("via @" + p.handle).toLowerCase();
+    $("#addCredit").hidden = S.creditOn && S.credit.trim().toLowerCase() === ("via @" + p.handle).toLowerCase();
   }
 }
 let lastImported = "";
@@ -331,17 +468,24 @@ async function getJSON(url){
   try { const r = await fetch(url, { signal: ctl.signal }); if (!r.ok) throw new Error("HTTP " + r.status); return await r.json(); }
   finally { clearTimeout(t); }
 }
+function fxParse(t){
+  const m = t.media || {}, a = t.author || {};
+  const imgs = (m.all || [...(m.photos || []), ...(m.videos || [])]).map(x => x.type === "photo" ? x.url : (x.thumbnail_url || x.url)).filter(Boolean);
+  return { text: t.raw_text?.text ?? t.text ?? "", handle: a.screen_name || "", name: a.name || "", avatar: a.avatar_url || "",
+    verified: !!(a.verification?.verified ?? a.verified), imgs, quote: t.quote ? fxParse(t.quote) : null };
+}
+function vxParse(j){
+  const imgs = (j.media_extended || []).map(x => x.type === "image" ? x.url : (x.thumbnail_url || x.url)).filter(Boolean);
+  return { text: j.text || "", handle: j.user_screen_name || "", name: j.user_name || "", avatar: j.user_profile_image_url || "",
+    verified: false, imgs: imgs.length ? imgs : (j.mediaURLs || []), quote: j.qrt ? vxParse(j.qrt) : null };
+}
 async function fetchTweet(p){
   try {
     const j = await getJSON(`https://api.fxtwitter.com/${p.handle}/status/${p.id}`);
-    const t = j.tweet; if (!t) throw new Error("no tweet");
-    const m = t.media || {};
-    const imgs = (m.all || [...(m.photos || []), ...(m.videos || [])]).map(x => x.type === "photo" ? x.url : (x.thumbnail_url || x.url)).filter(Boolean);
-    return { text: t.raw_text?.text ?? t.text ?? "", handle: t.author?.screen_name || p.handle, imgs };
+    if (!j.tweet) throw new Error("no tweet");
+    const t = fxParse(j.tweet); t.handle ||= p.handle; return t;
   } catch(e) {
-    const j = await getJSON(`https://api.vxtwitter.com/${p.handle}/status/${p.id}`);
-    const imgs = (j.media_extended || []).map(x => x.type === "image" ? x.url : (x.thumbnail_url || x.url)).filter(Boolean);
-    return { text: j.text || "", handle: j.user_screen_name || p.handle, imgs: imgs.length ? imgs : (j.mediaURLs || []) };
+    const t = vxParse(await getJSON(`https://api.vxtwitter.com/${p.handle}/status/${p.id}`)); t.handle ||= p.handle; return t;
   }
 }
 function cleanText(t){
@@ -349,6 +493,7 @@ function cleanText(t){
     .replace(/\s*https?:\/\/t\.co\/\w+\s*$/g, "").replace(/[ \t]+\n/g, "\n").trim();
 }
 function bigUrl(u){
+  if (/pbs\.twimg\.com\/profile_images\//.test(u)) return u.replace(/_(normal|bigger|mini)(\.\w+)$/, "_400x400$2");
   if (!/pbs\.twimg\.com\/media\//.test(u)) return u;
   const base = u.split("?")[0].replace(/\.(jpg|jpeg|png|webp)$/i, ""), ext = (u.match(/\.(jpg|jpeg|png|webp)(\?|$)/i) || [, "jpg"])[1];
   return `${base}?format=${ext}&name=large`;
@@ -365,14 +510,17 @@ async function importTweet(){
   const b = $("#importBtn"); b.disabled = true; b.textContent = "Loading…"; status("Getting the tweet…");
   try {
     const t = await fetchTweet(p);
-    S.text = cleanText(t.text); $("#text").value = S.text;
+    lastTweet = t;
+    S.text = cleanText(t.text); $("#text").value = S.text; S.capEdited = false;
+    if (t.quote) setQuote(t.quote); else clearQuote();
     media.forEach(m => m.url && URL.revokeObjectURL(m.url)); media = []; usingSample = false;
     const urls = t.imgs.slice(0, 4);
     const loaded = await Promise.all(urls.map(u => loadRemote(u).catch(() => null)));
     media = loaded.filter(Boolean).map((img, i) => ({ img, remote: urls[i] }));
     save(); renderThumbs(); refresh(); $("#savedBox").hidden = true;
     const miss = urls.length - media.length;
-    status(!urls.length ? "Tweet loaded. It has no images, so add your own if you want them."
+    status(t.quote && !urls.length ? `Tweet loaded with its quote of @${t.quote.handle}.`
+      : !urls.length ? "Tweet loaded. It has no images, so add your own if you want them."
       : miss ? `Tweet loaded, but ${miss} image${miss > 1 ? "s" : ""} wouldn't download. Tap Open post, save ${miss > 1 ? "them" : "it"}, and add ${miss > 1 ? "them" : "it"} below.`
       : "Done. Tap Save image.");
   } catch(e) {
@@ -384,12 +532,69 @@ $("#pasteLink").onclick = async () => {
   try { const t = await navigator.clipboard.readText(); $("#link").value = t; $("#link").dispatchEvent(new Event("input")); }
   catch(e) { $("#link").focus(); status("Press and hold in the link box, then tap Paste."); }
 };
-$("#addCredit").onclick = () => { const p = parseLink(S.link); if (!p) return; S.credit = "via @" + p.handle; $("#credit").value = S.credit; save(); syncDetect(); refresh(); };
+$("#addCredit").onclick = () => { const p = parseLink(S.link); if (!p) return; S.credit = "via @" + p.handle; S.creditOn = true; $("#creditOn").checked = true; $("#credit").value = S.credit; save(); syncDetect(); refresh(); };
 $("#clearPost").onclick = () => {
-  S.link = ""; S.text = ""; S.credit = ""; S.hlWords = ""; media = []; usingSample = false;
+  S.link = ""; S.text = ""; S.credit = ""; S.hlWords = ""; S.capEdited = false; media = []; usingSample = false;
+  lastTweet = null; clearQuote();
   $("#link").value = ""; $("#text").value = ""; $("#credit").value = ""; $("#hlWords").value = "";
   save(); syncDetect(); renderThumbs(); refresh(); $("#savedBox").hidden = true; status("Cleared. Paste the next tweet link.");
 };
+
+// ---------- quote tweet ----------
+let lastTweet = null;      // the last tweet loaded from a link
+let qAvatar = null, qMedia = [], qOrig = null;
+async function setQuote(q, mediaOverride){
+  qOrig = q;
+  S.qOn = true; S.qName = q.name || ""; S.qUser = q.handle ? "@" + q.handle : ""; S.qVerified = !!q.verified; S.qText = cleanText(q.text || "");
+  syncInputs(); save(); refresh();
+  qAvatar = null; if (!mediaOverride) qMedia = [];
+  const [av, ...imgs] = await Promise.all([q.avatar ? loadRemote(q.avatar).catch(() => null) : null,
+    ...(mediaOverride ? [] : (q.imgs || []).slice(0, 4).map(u => loadRemote(u).catch(() => null)))]);
+  if (qOrig !== q) return;   // a newer quote replaced this one while loading
+  qAvatar = av;
+  if (mediaOverride) qMedia = mediaOverride; else qMedia = imgs.filter(Boolean).map(img => ({ img }));
+  renderQThumbs(); refresh();
+}
+function clearQuote(){
+  qOrig = null; qAvatar = null; qMedia = [];
+  S.qOn = false; S.qName = ""; S.qUser = ""; S.qVerified = false; S.qText = "";
+  syncInputs(); renderQThumbs(); save(); refresh();
+}
+const qEdited = () => qOrig && (S.qName !== (qOrig.name || "") || S.qUser !== (qOrig.handle ? "@" + qOrig.handle : "") || S.qVerified !== !!qOrig.verified || S.qText !== cleanText(qOrig.text || ""));
+$("#qReset").onclick = () => { if (!qOrig) return; const q = qOrig; S.qName = q.name || ""; S.qUser = q.handle ? "@" + q.handle : ""; S.qVerified = !!q.verified; S.qText = cleanText(q.text || ""); syncInputs(); save(); refresh(); status(`Quote reset to @${q.handle}.`); };
+$("#qFromMain").onclick = () => {
+  const keep = media.filter(m => !m.sample);
+  if (lastTweet) {
+    const tw = { ...lastTweet, text: S.text || lastTweet.text };
+    media = []; usingSample = false; S.text = ""; $("#text").value = "";
+    setQuote(tw, keep); renderThumbs();
+    status(`@${tw.handle}'s tweet is now the quote. Write your own text above it.`);
+  } else {
+    if (!S.text.trim() && !keep.length) { status("Load a tweet link or type some text first."); return; }
+    const tw = { text: S.text, handle: "", name: "", verified: false, imgs: [] };
+    media = []; usingSample = false; S.text = ""; $("#text").value = "";
+    setQuote(tw, keep); qOrig = null; renderThumbs();
+    status("Your text is now the quote. Add the author's name and username, then write your own text above it.");
+  }
+};
+function renderQThumbs(){
+  setTimeout(syncCrop);
+  $("#qMediaCount").textContent = qMedia.length ? `· ${qMedia.length}` : "";
+  $("#qThumbs").innerHTML = qMedia.map((m, i) => `
+    <div class="thumb"><img src="${m.url || m.remote || m.img.src}" alt="Quote image ${i+1}">
+      <button class="x" data-i="${i}" aria-label="Remove quote image ${i+1}">×</button></div>`).join("");
+}
+$("#qThumbs").addEventListener("click", e => { const x = e.target.closest(".x"); if (!x) return; qMedia.splice(+x.dataset.i, 1); renderQThumbs(); refresh(); });
+$("#qMediaIn").addEventListener("change", e => {
+  const files = [...e.target.files].filter(f => f.type.startsWith("image/")); e.target.value = "";
+  files.slice(0, 4 - qMedia.length).forEach(f => { const url = URL.createObjectURL(f); loadImg(url).then(img => { if (img) { qMedia.push({ img, url }); renderQThumbs(); refresh(); } }); });
+  if (qMedia.length + files.length > 4) status("A quote holds up to 4 images.");
+});
+$("#qAvIn").addEventListener("change", e => {
+  const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+  loadImg(URL.createObjectURL(f)).then(i => { if (!i) { status("Couldn't open that photo."); return; } qAvatar = i; refresh(); });
+});
+$("#qAvRemove").onclick = () => { qAvatar = null; refresh(); };
 
 // ---------- media ----------
 function addMediaFiles(files){
@@ -409,6 +614,7 @@ function addMediaFiles(files){
   renderThumbs();
 }
 function renderThumbs(){
+  setTimeout(syncCrop);
   $("#mediaCount").textContent = media.length ? `· ${media.length}` : "";
   $("#drop").hidden = media.length >= 4;
   $("#thumbs").innerHTML = media.map((m, i) => `
@@ -454,8 +660,8 @@ $("#avRemove").onclick = () => { avatar = null; refresh(); };
 const canvas = $("#stage"), ctx = canvas.getContext("2d");
 const SIZES = { "4:5": [1080, 1350], "1:1": [1080, 1080], "9:16": [1080, 1920] };
 const COL = () => S.bg === "black"
-  ? { bg:"#000000", text:"#e7e9ea", sub:"#71767b", ph:"#16181c" }
-  : { bg:"#ffffff", text:"#0f1419", sub:"#536471", ph:"#eff3f4" };
+  ? { bg:"#000000", text:"#e7e9ea", sub:"#71767b", ph:"#16181c", line:"#2f3336", avBg:"#2f3336" }
+  : { bg:"#ffffff", text:"#0f1419", sub:"#536471", ph:"#eff3f4", line:"#cfd9de", avBg:"#cfd9de" };
 const norm = w => w.toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
 function hlMask(words){
   const n = words.map(norm), mask = words.map(() => false);
@@ -489,15 +695,38 @@ function badge(x, cy, s, color){
   ctx.moveTo(cx - s*.21, cy + s*.01); ctx.lineTo(cx - s*.05, cy + s*.17); ctx.lineTo(cx + s*.23, cy - s*.15); ctx.stroke();
 }
 function rr(x, y, w, h, r){ ctx.beginPath(); ctx.roundRect ? ctx.roundRect(x, y, w, h, r) : ctx.rect(x, y, w, h); }
-function cover(img, x, y, w, h, r, c){
+// m carries the photo's crop: z = zoom (1 fills the frame), px/py = where it sits (0 left/top edge, .5 centered, 1 right/bottom edge)
+let hits = [], selItem = null, cleanDraw = false, lastSideAuto = 60;
+function cover(img, x, y, w, h, r, c, m){
   ctx.save(); rr(x, y, w, h, r); ctx.clip();
   if (img && img.naturalWidth) {
-    const s = Math.max(w/img.naturalWidth, h/img.naturalHeight), dw = img.naturalWidth*s, dh = img.naturalHeight*s;
-    ctx.drawImage(img, x + (w - dw)/2, y + (h - dh)/2, dw, dh);
+    const z = m?.z || 1, px = m?.px ?? .5, py = m?.py ?? .5;
+    const s = Math.max(w/img.naturalWidth, h/img.naturalHeight) * z, dw = img.naturalWidth*s, dh = img.naturalHeight*s;
+    ctx.drawImage(img, x - (dw - w)*px, y - (dh - h)*py, dw, dh);
+    if (m) hits.push({ m, x, y, w, h, r, dw, dh });
   } else { ctx.fillStyle = c.ph; ctx.fillRect(x, y, w, h); }
   ctx.restore();
 }
 // cells for 1–4 images inside the media box, following X's grid
+function cellsV(n, x, y, w, h, g){
+  const ch = (h - g*(n-1)) / n;
+  return Array.from({ length: n }, (_, i) => [x, y + i*(ch + g), w, ch]);
+}
+// split text into a title (before the first blank line) and the list after it
+function splitText(){
+  const t = S.text.replace(/\r/g, "").trim(), i = t.search(/\n[ \t]*\n/);
+  return i < 0 ? { head: "", body: t } : { head: t.slice(0, i).trim(), body: t.slice(i).trim() };
+}
+function drawLines(lines, x, y, fs, lh, w, center, color){
+  ctx.font = `400 ${fs}px ${SANS}`; ctx.textBaseline = "alphabetic"; ctx.textAlign = "left";
+  const sp = ctx.measureText(" ").width;
+  lines.forEach((ln, i) => {
+    const lw = ln.reduce((a, wd, j) => a + wd.width + (j ? sp : 0), 0);
+    let lx = center ? x + Math.round((w - lw)/2) : x;
+    const by = y + i*lh + Math.round(fs*.95);
+    ln.forEach(wd => { ctx.fillStyle = wd.hl ? S.hlColor : color; ctx.fillText(wd.w, lx, by); lx += wd.width + sp; });
+  });
+}
 function cells(n, x, y, w, h, g){
   const hw = (w - g)/2, hh = (h - g)/2;
   if (n === 1) return [[x, y, w, h]];
@@ -506,35 +735,67 @@ function cells(n, x, y, w, h, g){
   return [[x, y, hw, hh], [x + hw + g, y, hw, hh], [x, y + hh + g, hw, hh], [x + hw + g, y + hh + g, hw, hh]];
 }
 function draw(){
+  hits = [];
   const c = COL(), [W, H] = SIZES[S.format];
   if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
   const g = ctx;
   const story = S.format === "9:16";
   const M = 22, TM = 46, GAP = 12, R = 30;           // media margin, text margin, media gap, corner radius
-  const fs = { S: 44, M: 50, L: 60 }[S.size], lh = Math.round(fs*1.26);
-
-  // measure
-  g.font = `400 ${fs}px ${SANS}`;
-  const maxW = W - 2*TM;
-  const lines = S.text.trim() ? wrapWords(S.text, maxW) : [];
   const n = Math.min(media.length, 4);
   const showAv = S.lockOn && S.showAv;
   const AV = 96, LOCK = S.lockOn ? (showAv ? AV : 84) : 0;
-  const credit = S.credit.trim();
-  const textH = lines.length ? lines.length*lh : 0;
+  const credit = S.creditOn ? S.credit.trim() : "";
   const pad = story ? 220 : 64;
-  const fixed = (LOCK ? LOCK + 36 : 0) + textH + (n ? (textH ? 34 : 0) : 0) + (credit ? 64 : 0);
-  let mh = 0;
-  if (n) {
-    const mw = W - 2*M, avail = Math.max(240, H - 2*pad - fixed);
-    let pref;
-    if (n === 1) { const im = media[0].img; pref = im.naturalWidth ? mw * im.naturalHeight / im.naturalWidth : mw*.75; }
-    else if (n === 2) pref = ((mw - GAP)/2) * 1.5;
-    else if (n === 3) pref = mw * .9;
-    else pref = mw * .9;
-    mh = Math.round(Math.min(avail, pref));
+  const Q = quoteLayout(W, TM, c);
+  const layout = S.layout === "side" && !n ? "stack" : S.layout;   // side-by-side needs photos
+  const maxW = W - 2*TM, COLG = 40;
+  const pw = Math.round((W - 2*M) * (S.sideW || .45)), sideTW = W - TM - M - pw - 32;   // photo column, text column
+  const mw = W - 2*M;
+  let pref = 0;
+  if (n === 1) { const im = media[0].img; pref = im.naturalWidth ? mw * im.naturalHeight / im.naturalWidth : mw*.75; }
+  else if (n === 2) pref = ((mw - GAP)/2) * 1.5;
+  else if (n) pref = mw * .9;
+  const lockH = LOCK ? LOCK + 36 : 0, qH = Q ? Q.h : 0, credH = credit ? 64 : 0, room = H - 2*pad;
+
+  // lay the text out at a given size
+  function measure(fs){
+    const lh = Math.round(fs*1.26), r = { fs, lh };
+    g.font = `400 ${fs}px ${SANS}`;
+    if (layout === "cols") {
+      const { head, body } = splitText(), rows = body.split("\n").filter(l => l.trim()), half = Math.ceil(rows.length/2);
+      r.cw = (maxW - COLG)/2;
+      r.head = head ? wrapWords(head, maxW) : [];
+      r.left = wrapWords(rows.slice(0, half).join("\n"), r.cw); r.right = wrapWords(rows.slice(half).join("\n"), r.cw);
+      r.wraps = r.left.length + r.right.length > rows.length;   // a list item spilled onto a second line
+      r.headH = r.head.length*lh; r.gapHB = r.headH && rows.length ? Math.round(lh*.6) : 0;
+      r.textH = r.headH + r.gapHB + Math.max(r.left.length, r.right.length)*lh;
+    } else {
+      r.lines = S.text.trim() ? wrapWords(S.text, layout === "side" ? sideTW : maxW) : [];
+      r.textH = r.lines.length*lh;
+    }
+    return r;
   }
-  const total = fixed + mh;
+  const need = m => layout === "side"
+    ? lockH + Math.max(m.textH, 300) + (Q ? 30 + qH : 0) + credH
+    : lockH + m.textH + ((n || Q) && m.textH ? 34 : 0) + (n ? Math.min(pref, 320) : 0) + (Q ? qH + (n ? 30 : 0) : 0) + credH;
+  // shrink the text until everything fits
+  let T = measure({ S: 44, M: 50, L: 60 }[S.size]);
+  while (T.fs > 24 && (need(T) > room || (T.wraps && T.fs > 30))) T = measure(T.fs - 2);
+  const fs = T.fs, lh = T.lh, textH = T.textH;
+
+  let mh = 0, bodyH = 0, fixed;
+  if (layout === "side") {
+    fixed = lockH + (Q ? 30 + qH : 0) + credH;
+    const availS = Math.max(240, room - fixed);
+    // photo height: matches the text unless you set your own (share of the space available)
+    mh = S.sideH ? Math.round(Math.max(150, availS * S.sideH)) : Math.round(Math.min(availS, Math.max(textH, 420) * (S.frameH || 1)));
+    lastSideAuto = Math.round(Math.min(availS, Math.max(textH, 420) * (S.frameH || 1)) / availS * 100);
+    bodyH = Math.max(textH, mh);
+  } else {
+    fixed = lockH + textH + ((n || Q) && textH ? 34 : 0) + (Q ? qH + (n ? 30 : 0) : 0) + credH;
+    if (n) mh = Math.round(Math.min(Math.max(240, room - fixed), pref * (S.frameH || 1)));
+  }
+  const total = fixed + (layout === "side" ? bodyH : mh);
   let y = Math.max(40, Math.round((H - total)/2));
 
   g.fillStyle = c.bg; g.fillRect(0, 0, W, H);
@@ -560,24 +821,38 @@ function draw(){
     y += LOCK + 36;
   }
 
-  // tweet text
-  if (lines.length) {
-    g.font = `400 ${fs}px ${SANS}`; g.textBaseline = "alphabetic"; g.textAlign = "left";
-    const sp = g.measureText(" ").width;
-    lines.forEach((ln, i) => {
-      const lw = ln.reduce((a, w, j) => a + w.width + (j ? sp : 0), 0);
-      let x = S.tAlign === "center" ? Math.round((W - lw)/2) : TM;
-      const by = y + i*lh + Math.round(fs*.95);
-      ln.forEach(w => { g.fillStyle = w.hl ? S.hlColor : c.text; g.fillText(w.w, x, by); x += w.width + sp; });
-    });
-    y += textH + (n ? 34 : 0);
+  const center = S.tAlign === "center";
+  if (layout === "side") {
+    // text on the left, photos stacked on the right
+    if (textH) drawLines(T.lines, TM, y + Math.round((bodyH - textH)/2), fs, lh, sideTW, center, c.text);
+    const px = W - M - pw, py = y + Math.round((bodyH - mh)/2);
+    cellsV(n, px, py, pw, mh, GAP).forEach((cl, i) => cover(media[i].img, cl[0], cl[1], cl[2], cl[3], R, c, media[i]));
+    y += bodyH + (Q ? 30 : 0);
+  } else {
+    // tweet text: one block, or a title over two columns
+    if (textH) {
+      if (layout === "cols") {
+        if (T.head.length) drawLines(T.head, TM, y, fs, lh, maxW, center, c.text);
+        const cy = y + T.headH + T.gapHB;
+        drawLines(T.left, TM, cy, fs, lh, T.cw, false, c.text);
+        drawLines(T.right, TM + T.cw + COLG, cy, fs, lh, T.cw, false, c.text);
+      } else drawLines(T.lines, TM, y, fs, lh, maxW, center, c.text);
+      y += textH + (n || Q ? 34 : 0);
+    }
+    // media
+    if (n) {
+      cells(n, M, y, W - 2*M, mh, GAP).forEach((cl, i) => cover(media[i].img, cl[0], cl[1], cl[2], cl[3], R, c, media[i]));
+      y += mh + (Q ? 30 : 0);
+    }
   }
 
-  // media
-  if (n) {
-    cells(n, M, y, W - 2*M, mh, GAP).forEach((cl, i) => cover(media[i].img, cl[0], cl[1], cl[2], cl[3], R, c));
-    y += mh;
-  }
+  // quote tweet card
+  if (Q) { drawQuote(Q, y, c); y += Q.h; }
+
+  // outline the photo being cropped (preview only)
+  const hs = hits.find(h => h.m === selItem);
+  if (!hs && selItem) { selItem = null; syncCrop(); }
+  if (hs && !cleanDraw) { g.save(); rr(hs.x - 3, hs.y - 3, hs.w + 6, hs.h + 6, hs.r + 3); g.lineWidth = 6; g.strokeStyle = "#1d9bf0"; g.stroke(); g.restore(); }
 
   // credit
   if (credit) {
@@ -587,10 +862,56 @@ function draw(){
   }
 }
 
+// quote card: header (photo, name, badge, @handle), text, then up to 4 images
+function quoteLayout(W, TM, c){
+  const hasText = S.qText.trim(), qn = Math.min(qMedia.length, 4);
+  if (!S.qOn || (!hasText && !qn && !S.qName.trim() && !S.qUser.trim())) return null;
+  const x = TM, w = W - 2*TM, P = 30, AVQ = 56, fsq = 38, lhq = Math.round(fsq*1.3), iw = w - 2*P;
+  ctx.font = `400 ${fsq}px ${SANS}`;
+  const lines = hasText ? wrapWords(S.qText, iw) : [];
+  let mh = 0;
+  if (qn === 1) { const im = qMedia[0].img; mh = im.naturalWidth ? Math.min(iw * im.naturalHeight / im.naturalWidth, iw * .75) : iw*.56; }
+  else if (qn) mh = iw * .56;
+  mh = Math.round(mh);
+  const h = P + AVQ + (lines.length ? 18 + lines.length*lhq : 0) + (qn ? 22 + mh : 0) + P;
+  return { x, w, P, AVQ, fsq, lhq, iw, lines, qn, mh, h };
+}
+function fitText(t, maxW){ if (ctx.measureText(t).width <= maxW) return t; while (t.length > 1 && ctx.measureText(t + "…").width > maxW) t = t.slice(0, -1); return t + "…"; }
+function drawQuote(Q, y, c){
+  const g = ctx, { x, w, P, AVQ } = Q;
+  rr(x, y, w, Q.h, 28); g.lineWidth = 2; g.strokeStyle = c.line; g.stroke();
+  // header
+  const ax = x + P, ay = y + P;
+  g.save(); g.beginPath(); g.arc(ax + AVQ/2, ay + AVQ/2, AVQ/2, 0, Math.PI*2); g.clip();
+  if (qAvatar) { const s = Math.min(qAvatar.naturalWidth, qAvatar.naturalHeight); g.drawImage(qAvatar, (qAvatar.naturalWidth - s)/2, (qAvatar.naturalHeight - s)/2, s, s, ax, ay, AVQ, AVQ); }
+  else { g.fillStyle = c.avBg; g.fillRect(ax, ay, AVQ, AVQ); g.fillStyle = c.text; g.font = `700 26px ${SANS}`; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText((S.qName.trim()[0] || "?").toUpperCase(), ax + AVQ/2, ay + AVQ/2 + 1); }
+  g.restore();
+  g.textAlign = "left"; g.textBaseline = "alphabetic";
+  let tx = ax + AVQ + 16; const base = ay + AVQ/2 + 12, right = x + w - P, bs = 32;
+  g.font = `700 34px ${SANS}`; g.fillStyle = c.text;
+  const name = fitText(S.qName.trim(), right - tx - (S.qVerified ? bs + 10 : 0));
+  if (name) { g.fillText(name, tx, base); tx += g.measureText(name).width; }
+  if (S.qVerified) { badge(tx + 8, base - 12, bs, "#1d9bf0"); tx += bs + 8; }
+  g.font = `400 32px ${SANS}`; g.fillStyle = c.sub;
+  const user = S.qUser.trim(); if (user && right - tx - 12 > 40) g.fillText(fitText(user, right - tx - 12), tx + 12, base);
+  // text
+  let cy = ay + AVQ;
+  if (Q.lines.length) {
+    cy += 18; g.font = `400 ${Q.fsq}px ${SANS}`; const sp = g.measureText(" ").width;
+    Q.lines.forEach((ln, i) => { let lx = x + P; const by = cy + i*Q.lhq + Math.round(Q.fsq*.95);
+      ln.forEach(wd => { g.fillStyle = wd.hl ? S.hlColor : c.text; g.fillText(wd.w, lx, by); lx += wd.width + sp; }); });
+    cy += Q.lines.length * Q.lhq;
+  }
+  // images
+  if (Q.qn) { cy += 22; cells(Q.qn, x + P, cy, Q.iw, Q.mh, 8).forEach((cl, i) => cover(qMedia[i].img, cl[0], cl[1], cl[2], cl[3], 20, c, qMedia[i])); }
+}
+
 let raf = 0;
 function refresh(){
+  syncCaption();
+  ver++;
   if (raf) return;
-  raf = requestAnimationFrame(() => { raf = 0; syncUi(); draw(); });
+  raf = requestAnimationFrame(() => { raf = 0; syncUi(); draw(); prepare(); });
 }
 function syncUi(){
   const [W, H] = SIZES[S.format];
@@ -600,48 +921,95 @@ function syncUi(){
   $("#badgeField").hidden = !S.verified;
   $("#avLabel").textContent = avatar ? "Change photo" : "Add photo";
   $("#avRemove").hidden = !avatar;
+  $("#sideField").hidden = S.layout !== "side";
+  $("#sideW").value = Math.round(S.sideW * 100); $("#sideWVal").textContent = Math.round(S.sideW * 100) + "%";
+  $("#sideH").value = S.sideH ? Math.round(S.sideH * 100) : lastSideAuto;
+  $("#sideHVal").textContent = S.sideH ? Math.round(S.sideH * 100) + "%" : "matches text";
+  $("#sideHAuto").disabled = !S.sideH;
+  $("#layoutHint").textContent = S.layout === "cols" ? "The title stays on top. The list after the first blank line splits into two columns, with photos below."
+    : S.layout === "side" ? (media.length ? "Words on the left, photos on the right." : "Add a photo to put it beside the words.")
+    : "Words on top, photos underneath.";
+  $("#qBody").hidden = !S.qOn;
+  $("#creditBody").hidden = !S.creditOn;
+  $("#lookSum").textContent = `${S.bg === "black" ? "Black" : "White"} · ${({ S: "Small", M: "Medium", L: "Large" })[S.size]} text · ${S.tAlign === "center" ? "Centered" : "Left"}`;
+  $("#brandSum").textContent = S.lockOn ? `${S.name} ${S.user}`.trim() : "Off";
+  $("#qReset").hidden = !qEdited();
+  $("#qSrc").hidden = !qOrig?.handle;
+  if (qOrig?.handle) $("#qSrc").innerHTML = `Original author: <b>${esc(qOrig.name || "")}</b> @${esc(qOrig.handle)}`;
+  $("#qAvLabel").textContent = qAvatar ? "Change photo" : "Add photo"; $("#qAvRemove").hidden = !qAvatar;
+  { const q = $("#qAvPrev").getContext("2d"); q.clearRect(0, 0, 104, 104);
+    if (qAvatar) { const s = Math.min(qAvatar.naturalWidth, qAvatar.naturalHeight); q.drawImage(qAvatar, (qAvatar.naturalWidth - s)/2, (qAvatar.naturalHeight - s)/2, s, s, 0, 0, 104, 104); }
+    else { q.fillStyle = "#8e8e93"; q.font = `700 40px ${SANS}`; q.textAlign = "center"; q.textBaseline = "middle"; q.fillText((S.qName.trim()[0] || "?").toUpperCase(), 52, 54); } }
   const p = $("#avPrev").getContext("2d"); p.clearRect(0, 0, 104, 104);
   if (avatar) { const s = Math.min(avatar.naturalWidth, avatar.naturalHeight); p.drawImage(avatar, (avatar.naturalWidth - s)/2, (avatar.naturalHeight - s)/2, s, s, 0, 0, 104, 104); }
   else { p.fillStyle = "#8e8e93"; p.font = `700 40px ${SANS}`; p.textAlign = "center"; p.textBaseline = "middle"; p.fillText((S.name.trim()[0] || "?").toUpperCase(), 52, 54); }
-  [["#bgSeg","bg"],["#formatSeg","format"],["#sizeSeg","size"],["#tAlignSeg","tAlign"],["#alignSeg","align"],["#badgeSeg","badgeColor"]]
+  [["#bgSeg","bg"],["#layoutSeg","layout"],["#formatSeg","format"],["#sizeSeg","size"],["#tAlignSeg","tAlign"],["#alignSeg","align"],["#badgeSeg","badgeColor"]]
     .forEach(([sel, k]) => $(sel).querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === S[k])));
 }
 function syncInputs(){
   $("#link").value = S.link; $("#text").value = S.text; $("#credit").value = S.credit;
   $("#hlWords").value = S.hlWords; $("#hlColor").value = S.hlColor;
-  $("#lockOn").checked = S.lockOn; $("#showAv").checked = S.showAv; $("#pVerified").checked = S.verified;
+  $("#creditOn").checked = S.creditOn; $("#lockOn").checked = S.lockOn; $("#showAv").checked = S.showAv; $("#pVerified").checked = S.verified;
   $("#pName").value = S.name; $("#pUser").value = S.user;
+  $("#qOn").checked = S.qOn; $("#qName").value = S.qName; $("#qUser").value = S.qUser; $("#qVerified").checked = S.qVerified; $("#qText").value = S.qText;
+  $("#capText").checked = S.capText; $("#capCredit").checked = S.capCredit; $("#capCta").value = S.capCta; $("#capTags").value = S.capTags;
+  $("#caption").value = S.caption;
   syncDetect();
 }
 
 // ---------- inputs ----------
-[["#bgSeg","bg"],["#formatSeg","format"],["#sizeSeg","size"],["#tAlignSeg","tAlign"],["#alignSeg","align"],["#badgeSeg","badgeColor"]].forEach(([sel, k]) =>
+[["#bgSeg","bg"],["#layoutSeg","layout"],["#formatSeg","format"],["#sizeSeg","size"],["#tAlignSeg","tAlign"],["#alignSeg","align"],["#badgeSeg","badgeColor"]].forEach(([sel, k]) =>
   $(sel).addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; S[k] = b.dataset.v; save(); refresh(); }));
 [["#text","text"],["#credit","credit"],["#hlWords","hlWords"],["#hlColor","hlColor"],["#pName","name"],["#pUser","user"]].forEach(([sel, k]) =>
   $(sel).addEventListener("input", e => { S[k] = e.target.value; save(); if (k === "credit") syncDetect(); refresh(); }));
 $("#pUser").addEventListener("blur", e => { const v = e.target.value.trim(); if (v && !v.startsWith("@")) { S.user = "@" + v; e.target.value = S.user; save(); refresh(); } });
-[["#lockOn","lockOn"],["#showAv","showAv"],["#pVerified","verified"]].forEach(([sel, k]) =>
+[["#qName","qName"],["#qUser","qUser"],["#qText","qText"]].forEach(([sel, k]) =>
+  $(sel).addEventListener("input", e => { S[k] = e.target.value; save(); refresh(); }));
+$("#qUser").addEventListener("blur", e => { const v = e.target.value.trim(); if (v && !v.startsWith("@")) { S.qUser = "@" + v; e.target.value = S.qUser; save(); refresh(); } });
+[["#qOn","qOn"],["#qVerified","qVerified"]].forEach(([sel, k]) =>
+  $(sel).addEventListener("change", e => { S[k] = e.target.checked; save(); refresh(); }));
+[["#lockOn","lockOn"],["#showAv","showAv"],["#pVerified","verified"],["#creditOn","creditOn"]].forEach(([sel, k]) =>
   $(sel).addEventListener("change", e => { S[k] = e.target.checked; save(); refresh(); }));
 
 // ---------- export ----------
+function fileName(){
+  const p = parseLink(S.link), base = (S.name || "post").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "post";
+  return `${base}-${p ? p.id.slice(-6) : Date.now().toString(36)}.png`;
+}
+let ready = null, readyVer = -1, ver = 0, readyTimer = 0;
 const toBlob = () => new Promise(r => canvas.toBlob(r, "image/png"));
+// keep the finished PNG ready, so one tap opens the share sheet right away
+// (phones refuse to open it if the image is still being made when you tap)
+function makeBlob(){ cleanDraw = true; draw(); const p = toBlob(); cleanDraw = false; draw(); return p; }
+function prepare(){
+  const v = ver; clearTimeout(readyTimer);
+  readyTimer = setTimeout(() => makeBlob().then(b => { if (b && v === ver) { ready = b; readyVer = v; } }), 300);
+}
+function showFallback(blob){ $("#savedImg").src = URL.createObjectURL(blob); $("#savedBox").hidden = false; }
 $("#saveBtn").onclick = async () => {
-  draw(); const blob = await toBlob(); if (!blob) { status("Couldn't make the image. Try again."); return; }
-  const url = URL.createObjectURL(blob); $("#savedImg").src = url; $("#savedBox").hidden = false;
-  const file = new File([blob], fileName(), { type: "image/png" });
-  // phones: open the share sheet so "Save Image" puts it in Photos
-  if (navigator.canShare && navigator.canShare({ files: [file] }) && matchMedia("(pointer:coarse)").matches) {
+  $("#savedBox").hidden = true;
+  const blob = ready && readyVer === ver ? ready : await makeBlob();
+  if (!blob) { status("Couldn't make the image. Try again."); return; }
+  const name = fileName();
+  // phones: the share sheet's "Save Image" puts it straight into Photos
+  const file = new File([blob], name, { type: "image/png" });
+  if (matchMedia("(pointer:coarse)").matches && navigator.canShare?.({ files: [file] })) {
     try { await navigator.share({ files: [file] }); status("Done."); return; }
-    catch(e) { if (e.name === "AbortError") { status("Cancelled. You can also press and hold the image below."); return; } }
+    catch(e) { if (e.name === "AbortError") { status("Save cancelled."); return; } }
   }
-  const a = document.createElement("a"); a.href = url; a.download = fileName(); document.body.appendChild(a); a.click(); a.remove();
-  status("Saved " + fileName());
+  // computers: straight to Downloads
+  try {
+    const url = URL.createObjectURL(blob), a = document.createElement("a");
+    a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 10000);
+    status(`Saved ${name} to your Downloads.`);
+  } catch(e) { showFallback(blob); status("Press and hold (or right-click) the image below to save it."); }
 };
 $("#copyBtn").onclick = async () => {
-  draw();
+  cleanDraw = true; draw(); const pending = toBlob(); cleanDraw = false; draw();
   try {
     if (!window.ClipboardItem) throw new Error("no clipboard");
-    await navigator.clipboard.write([new ClipboardItem({ "image/png": toBlob() })]);
+    await navigator.clipboard.write([new ClipboardItem({ "image/png": pending })]);
     status("Image copied. Paste it into your post.");
   } catch(e) { status(e?.name === "SecurityError" ? "One image blocks copying. Use Save image instead." : "This browser won't copy images. Use Save image instead."); }
 };
@@ -732,6 +1100,100 @@ $("#profUpdate").onclick = async () => {
   if (await putProfile(snapshotProfile(p.title, p.id, p.createdAt))) status(`Saved changes to ${p.title}.`);
 };
 
+// ---------- Instagram caption ----------
+const CAP_MAX = 2200, TAG_MAX = 30;
+function tags(){
+  return [...new Set(S.capTags.split(/[\s,]+/).map(t => t.replace(/^#+/, "").replace(/[^\p{L}\p{N}_]/gu, "")).filter(Boolean).map(t => "#" + t))];
+}
+function buildCaption(){
+  const parts = [], p = parseLink(S.link), me = (S.user || "").trim();
+  if (S.capText && S.text.trim()) parts.push(S.text.trim());
+  if (S.capCredit && p) parts.push(`(via @${p.handle} on X)`);
+  const cta = S.capCta.replace(/\{me\}/g, me).trim();
+  if (cta) parts.push(cta);
+  const t = tags(); if (t.length) parts.push(t.join(" "));
+  return parts.join("\n\n");
+}
+function syncCaption(force){
+  if (force) S.capEdited = false;
+  if (!S.capEdited) { S.caption = buildCaption(); $("#caption").value = S.caption; }
+  const n = [...S.caption].length, tg = (S.caption.match(/#[\p{L}\p{N}_]+/gu) || []).length, c = $("#capCount");
+  c.textContent = `${n.toLocaleString()} / 2,200 · ${tg} / 30 tags`;
+  c.classList.toggle("over", n > CAP_MAX || tg > TAG_MAX);
+  $("#capHint").textContent = n > CAP_MAX ? "Too long for Instagram. Trim it to 2,200 characters."
+    : tg > TAG_MAX ? "Instagram allows 30 hashtags. Remove a few."
+    : S.capEdited ? "You edited this. Press Rebuild to start over from the tweet." : "Built from the tweet. Edit it here before you copy.";
+  $("#capRebuild").disabled = !S.capEdited;
+  save();
+}
+$("#caption").addEventListener("input", e => { S.caption = e.target.value; S.capEdited = true; syncCaption(); });
+$("#capRebuild").onclick = () => syncCaption(true);
+$("#capCopy").onclick = async () => {
+  const ta = $("#caption");
+  try { await navigator.clipboard.writeText(ta.value); status("Caption copied. Paste it into Instagram."); }
+  catch(e) { ta.focus(); ta.select(); status("Press and hold the caption, then tap Copy."); }
+};
+[["#capCta","capCta"],["#capTags","capTags"]].forEach(([sel, k]) =>
+  $(sel).addEventListener("input", e => { S[k] = e.target.value; syncCaption(); }));
+[["#capText","capText"],["#capCredit","capCredit"]].forEach(([sel, k]) =>
+  $(sel).addEventListener("change", e => { S[k] = e.target.checked; syncCaption(); }));
+
+$("#sideW").addEventListener("input", e => { S.sideW = e.target.value / 100; save(); refresh(); });
+$("#sideH").addEventListener("input", e => { S.sideH = e.target.value / 100; save(); refresh(); });
+$("#sideHAuto").onclick = () => { S.sideH = 0; save(); refresh(); };
+
+// ---------- crop: move and zoom photos in the preview ----------
+const screenEl = $("#screen");
+function toCanvas(e){ const r = canvas.getBoundingClientRect(); return { x: (e.clientX - r.left) * canvas.width / r.width, y: (e.clientY - r.top) * canvas.height / r.height }; }
+const hitAt = p => [...hits].reverse().find(h => p.x >= h.x && p.x <= h.x + h.w && p.y >= h.y && p.y <= h.y + h.h);
+function syncCrop(){
+  const box = $("#cropBox"), any = media.some(m => !m.sample) || qMedia.length || media.length;
+  screenEl.classList.toggle("cropping", !!selItem); screenEl.classList.toggle("has-photos", !!any && !selItem);
+  $("#cropHint").hidden = !any || !!selItem;
+  box.hidden = !selItem; if (!selItem) return;
+  const inQuote = qMedia.includes(selItem), list = inQuote ? qMedia : media;
+  $("#cropWhich").textContent = `${inQuote ? "Quote photo" : "Photo"} ${list.indexOf(selItem) + 1}`;
+  const z = Math.round((selItem.z || 1) * 100); $("#cropZoom").value = z; $("#cropZoomVal").textContent = z + "%";
+  $("#frameField").hidden = inQuote;
+  const f = Math.round((S.frameH || 1) * 100); $("#frameH").value = f; $("#frameHVal").textContent = f + "%";
+}
+function setZoom(m, z){ m.z = Math.min(4, Math.max(1, z)); syncCrop(); refresh(); }
+const ptrs = new Map(); let drag = null, pinch = null;
+canvas.addEventListener("pointerdown", e => {
+  const p = toCanvas(e), h = hitAt(p);
+  if (!h) { if (selItem && !ptrs.size) { selItem = null; syncCrop(); refresh(); } return; }
+  if (h.m !== selItem && !ptrs.size) { selItem = h.m; syncCrop(); refresh(); }
+  if (h.m !== selItem) return;
+  ptrs.set(e.pointerId, p); canvas.setPointerCapture(e.pointerId);
+  if (ptrs.size === 1) { drag = { p, px: selItem.px ?? .5, py: selItem.py ?? .5, h }; screenEl.classList.add("dragging"); }
+  if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch = { d: Math.hypot(a.x - b.x, a.y - b.y), z: selItem.z || 1 }; drag = null; }
+  e.preventDefault();
+});
+canvas.addEventListener("pointermove", e => {
+  if (!ptrs.has(e.pointerId) || !selItem) return;
+  const p = toCanvas(e); ptrs.set(e.pointerId, p);
+  if (pinch && ptrs.size === 2) { const [a, b] = [...ptrs.values()]; setZoom(selItem, pinch.z * Math.hypot(a.x - b.x, a.y - b.y) / (pinch.d || 1)); return; }
+  if (drag) {
+    const h = hits.find(x => x.m === selItem) || drag.h, ox = h.dw - h.w, oy = h.dh - h.h;
+    if (ox > 0.5) selItem.px = Math.min(1, Math.max(0, drag.px - (p.x - drag.p.x) / ox));
+    if (oy > 0.5) selItem.py = Math.min(1, Math.max(0, drag.py - (p.y - drag.p.y) / oy));
+    refresh();
+  }
+});
+const endPtr = e => { ptrs.delete(e.pointerId); if (ptrs.size < 2) pinch = null; if (!ptrs.size) { drag = null; screenEl.classList.remove("dragging"); } };
+canvas.addEventListener("pointerup", endPtr); canvas.addEventListener("pointercancel", endPtr);
+canvas.addEventListener("wheel", e => {
+  const h = hitAt(toCanvas(e)); if (!h) return;
+  e.preventDefault();
+  if (h.m !== selItem) { selItem = h.m; }
+  setZoom(selItem, (selItem.z || 1) * Math.exp(-e.deltaY * 0.0015));
+}, { passive: false });
+$("#cropZoom").addEventListener("input", e => { if (selItem) setZoom(selItem, e.target.value / 100); });
+$("#frameH").addEventListener("input", e => { S.frameH = e.target.value / 100; $("#frameHVal").textContent = e.target.value + "%"; save(); refresh(); });
+$("#cropReset").onclick = () => { if (!selItem) return; selItem.z = 1; selItem.px = .5; selItem.py = .5; if (!qMedia.includes(selItem)) { S.frameH = 1; save(); } syncCrop(); refresh(); };
+$("#cropDone").onclick = () => { selItem = null; syncCrop(); refresh(); };
+document.addEventListener("keydown", e => { if (e.key === "Escape" && selItem) { selItem = null; syncCrop(); refresh(); } });
+
 // ---------- tabs ----------
 function switchTab(name){
   document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === name));
@@ -740,7 +1202,7 @@ function switchTab(name){
 document.querySelector(".tabs").addEventListener("click", e => { const b = e.target.closest("button"); if (b) switchTab(b.dataset.tab); });
 
 // ---------- boot ----------
-syncInputs(); renderThumbs(); refresh(); renderProfiles(); initProfiles();
+syncInputs(); renderThumbs(); refresh(); renderProfiles(); initProfiles(); syncCrop();
 if (usingSample) status("Showing an example. Paste a tweet link and tap Make it.");
 </script>
 </body></html>
